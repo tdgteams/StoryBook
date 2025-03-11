@@ -67,6 +67,7 @@ export interface IDocument {
   baseUrl?:string;
   isClickable?:boolean;
   highlightedWords?:string[];
+  originalFilename?:string;
 }
 
 export interface DocRendererProps {

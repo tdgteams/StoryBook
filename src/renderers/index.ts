@@ -3,6 +3,8 @@ import HTMLRenderer from "./html";
 import JPGRenderer from "./jpg";
 // import MSDocRenderer from "./msdoc";
 // import MyCustomDocxRenderer from "./docx"
+
+//NE-3410 (Anand Mukund) Start
 import PDFRenderer from "./pdf";
 import PNGRenderer from "./png";
 import TIFFRenderer from "./tiff";
@@ -11,7 +13,10 @@ import CSVRenderer from "./csv";
 import GIFRenderer from "./gif";
 import VideoRenderer from "./video";
 import WebPRenderer from "./webp";
-import { WithPDFInput } from "../DocViewer.stories";
+import { DocumentViewer } from "../DocViewer.stories";
+import JsonRenderCon from "./json";
+import MSDocRenderer from "./msdoc"
+import XMLRenderer from "./xml";
 
 // import MSDocRenderer from "./msdoc";
 
@@ -27,15 +32,16 @@ export const DocViewerRenderers = [
   GIFRenderer,
   VideoRenderer,
   WebPRenderer,
-  
-  // MSDocRenderer,
+  JsonRenderCon,
+  XMLRenderer,
+   MSDocRenderer,
 ];
 
 export {
   BMPRenderer,
   HTMLRenderer,
   JPGRenderer,
-  // MSDocRenderer,
+  MSDocRenderer,
   PDFRenderer,
   PNGRenderer,
   TIFFRenderer,
@@ -44,7 +50,10 @@ export {
   GIFRenderer,
   VideoRenderer,
   WebPRenderer,
+  JsonRenderCon,
+  XMLRenderer,
 
  
 };
-export{ WithPDFInput};
+export{ DocumentViewer};
+//NE-3410 (Anand Mukund) Start

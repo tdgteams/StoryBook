@@ -10,8 +10,8 @@ export const getFileName = (
 
   let fileName = "";
 
-  if (document.fileName) {
-    fileName = document.fileName;
+  if (document.originalFilename) { 
+    fileName = document.originalFilename; //NE-3410 (Anand Mukund)
   } else {
     fileName = document.uri || "";
     fileName = decodeURI(fileName);

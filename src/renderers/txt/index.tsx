@@ -1,81 +1,21 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { DocRenderer } from "../..";
+import { DocRenderer,IStyledProps } from "../..";
 import { textFileLoader } from "../../utils/fileLoaders";
 import { Container as SearchContainer } from "../pdf/components/PDFControls";
+import PDFControls from "../pdf/components/PDFControls";
+import { PDFProvider } from "../pdf/state";
+import TXTRendererCon from "./TextPages";
  
-const TXTRenderer: DocRenderer = ({ mainState: { currentDocument } }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [highlightedContent, setHighlightedContent] = useState("");
-  const highlightWords = currentDocument?.highlightedWords==undefined?[]:currentDocument.highlightedWords; // Predefined words to highlight
- 
-  // Highlight matching terms in the text
-  const highlightText = (text: any, terms: string[], search: string) => {
-    if (!text) return text;
- 
-    // Regex for predefined terms
-    const predefinedRegex = new RegExp(`(${terms.join("|")})`, "gi");
-    // Regex for search term
-    const searchRegex = search ? new RegExp(`(${search})`, "gi") : null;
- 
-    // Highlight predefined terms
-    let highlighted = text.replace(
-      predefinedRegex,
-      `<span class="highlight">$1</span>`
-    );
- 
-    // Highlight the search term (if exists) on top of predefined terms
-    if (searchRegex) {
-      highlighted = highlighted.replace(
-        searchRegex,
-        `<span class="search-highlight">$1</span>`
-      );
-    }
- 
-    return highlighted;
-  };
- 
-  useEffect(() => {
-    if (currentDocument?.fileData) {
-      // Highlight predefined words on initial render
-      const initialHighlighted = highlightText(
-        currentDocument.fileData,
-        highlightWords,
-        searchTerm
-      );
-      setHighlightedContent(initialHighlighted);
-    }
-  }, [currentDocument, searchTerm, highlightWords]);
- 
-  // Handle search term input
-  const handleSearch = (term: string) => {
-    setSearchTerm(term);
- 
-    if (currentDocument?.fileData) {
-      const highlighted = highlightText(
-        currentDocument.fileData,
-        highlightWords,
-        term
-      );
-      setHighlightedContent(highlighted);
-    }
-  };
- 
+const TXTRenderer: DocRenderer = ({ mainState }) => {
+  
   return (
+    < PDFProvider mainState={mainState}>
     <Container id="txt-renderer">
-      {/* Search Bar */}
-      <SearchContainer>
-        <label htmlFor="search">Search:</label>
-        <input type="search" id="search" value={searchTerm} onChange={(e) => handleSearch(e.target.value)} />
-      </SearchContainer>
- 
-      {/* Render highlighted content */}
-      <Content
-        dangerouslySetInnerHTML={{
-          __html: highlightedContent || (currentDocument?.fileData as string),
-        }}
-      />
+    <PDFControls />
+    <TXTRendererCon/>
     </Container>
+    </PDFProvider>
   );
 };
  
@@ -89,24 +29,26 @@ TXTRenderer.fileLoader = textFileLoader;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding: 30px;
-`;
- 
-const Content = styled.div`
-  width: 100%;
-  padding: 16px;
-  background-color: #f9f9f9;
-  font-family: monospace;
-  white-space: pre-wrap;
- 
-  .highlight {
-    background-color: yellow;
-    font-weight: bold;
+  flex: 1;
+  
+
+
+  /* width */
+  &::-webkit-scrollbar {
+    ${(props: IStyledProps) => {
+      return props.theme.disableThemeScrollbar ? "" : "width: 10px";
+    }};
   }
- 
-  .search-highlight {
-    background-color: lightgreen;
-    font-weight: bold;
+  /* Track */
+  &::-webkit-scrollbar-track {
+    /* background: ${(props: IStyledProps) => props.theme.secondary}; */
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: ${(props: IStyledProps) => props.theme.tertiary};
+  }
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${(props: IStyledProps) => props.theme.primary};
   }
 `;

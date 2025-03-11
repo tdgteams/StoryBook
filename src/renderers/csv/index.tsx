@@ -1,74 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import papaparse from "papaparse";
-import { DocRenderer } from "../..";
+import { DocRenderer, IStyledProps } from "../..";
 import { textFileLoader } from "../../utils/fileLoaders";
+import PDFControls from "../pdf/components/PDFControls";
+import { PDFProvider } from "../pdf/state";
+import { dataURLFileLoader } from "../../utils/fileLoaders";
+import CSVRendererPage from "./CSVRenderer";
 
-const CSVRenderer: DocRenderer = ({
-  mainState: { currentDocument, config },
-}) => {
-  const [rows, setRows] = useState<string[][]>([]);
-
-  useEffect(() => {
-    if (currentDocument?.fileData) {
-      const parseResult = papaparse.parse(currentDocument.fileData as string, {
-        delimiter: config?.csvDelimiter ?? ",",
-      });
-
-      if (!parseResult.errors?.length && parseResult.data) {
-        setRows(parseResult.data as string[][]);
-      }
-    }
-  }, [currentDocument, config?.csvDelimiter]);
-
-  if (!rows.length) {
-    return null;
-  }
-
+const CSVRenderer: DocRenderer = ({ mainState }) => {
+  //NE-3410 (Anand Mukund) Start
   return (
-    <Container>
-      <Table>
-        <thead>
-          <tr>
-            {rows[0].map((column) => (
-              <th key={column}>{column}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.slice(1, rows.length).map((row) => (
-            <tr key={row.join("")}>
-              {row.map((column) => (
-                <td key={column}>{column}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Container>
+    < PDFProvider mainState={mainState}>
+      <Container id="txt-renderer">
+        <PDFControls />
+        <CSVRendererPage />
+      </Container>
+    </PDFProvider>
   );
 };
 
 export default CSVRenderer;
-
 CSVRenderer.fileTypes = ["csv", "text/csv"];
 CSVRenderer.weight = 0;
 CSVRenderer.fileLoader = textFileLoader;
 
+// Styled components
 const Container = styled.div`
-  width: 100%;
-`;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  
 
-const Table = styled.table`
-  width: 100%;
-  text-align: left;
 
-  th,
-  td {
-    padding: 5px 10px;
-
-    &:empty {
-      display: none;
-    }
+  /* width */
+  &::-webkit-scrollbar {
+    ${(props: IStyledProps) => {
+    return props.theme.disableThemeScrollbar ? "" : "width: 10px";
+  }};
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    /* background: ${(props: IStyledProps) => props.theme.secondary}; */
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: ${(props: IStyledProps) => props.theme.tertiary};
+  }
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${(props: IStyledProps) => props.theme.primary};
   }
 `;
+//NE-3410 (Anand Mukund) END

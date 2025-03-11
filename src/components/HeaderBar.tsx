@@ -36,12 +36,14 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  z-index: 1;
+  z-index: 10;
   padding: 0 10px;
   background-color: ${(props: IStyledProps) => props.theme.primary};
   font-size: 16px;
   min-height: 50px;
-
+  position: sticky;
+  top: 0;  /* Sticks to the top when scrolling */
+  
   @media (max-width: 768px) {
     min-height: 30px;
     padding: 5px;
