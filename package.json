@@ -1,8 +1,8 @@
 {
-  "name": "react-doc-viewer-3rdi",
-  "version": "1.0.85",
+  "name": "tdg-react-doc-viewer",
+  "version": "1.0.154",
   "description": "File viewer for React.",
-  "author": "Matthew Mogford / Damian Cyntler",
+  "author": "THE DIGITAL GROUP",
   "type": "module",
   "keywords": [
     "reactjs",
@@ -19,12 +19,12 @@
     "dist/**"
   ],
   "types": "./dist/index.d.ts",
-  "main": "./dist/react-doc-viewer-3rdi.cjs",
-  "module": "./dist/react-doc-viewer-3rdi.js",
+  "main": "./dist/tdg-react-doc-viewer.cjs",
+  "module": "./dist/tdg-react-doc-viewer.js",
   "exports": {
     ".": {
-      "import": "./dist/react-doc-viewer-3rdi.js",
-      "require": "./dist/react-doc-viewer-3rdi.cjs",
+      "import": "./dist/tdg-react-doc-viewer.js",
+      "require": "./dist/tdg-react-doc-viewer.cjs",
       "types": "./dist/index.d.ts"
     },
     "./dist/index.css": {
@@ -34,8 +34,7 @@
   },
   "scripts": {
     "start": "storybook dev -p 6006",
-    "build": "vite build", 
-
+    "build": "vite build",
     "test": "vitest run",
     "lint": "eslint ./src --ext .ts,.tsx",
     "prettier:check": "prettier --check .",
@@ -50,9 +49,12 @@
     "@types/papaparse": "^5.3.14",
     "ajv": "^7.2.4",
     "core-js": "^3.37.1",
+    "lucide-react": "^0.475.0",
     "mustache": "^4.2.0",
     "papaparse": "^5.4.1",
     "react-pdf": "^9.0.0",
+    "react-to-print": "^3.0.5",
+    "stopword": "^3.1.4",
     "styled-components": "^6.1.11",
     "xlsx": "^0.18.5"
   },
@@ -72,6 +74,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/react-router-dom": "^5.3.3",
+    "@types/stopword": "^2.0.3",
     "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
