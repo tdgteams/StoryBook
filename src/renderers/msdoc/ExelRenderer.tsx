@@ -126,7 +126,7 @@ const ExcelRenderer: FC = () => {
                     </SearchBar>
                 </SearchContainer>
 
-                <Table style={{ transform: `scale(${zoomLevel})` }} >
+                <Table style={{ transform: `scale(${zoomLevel})`, transformOrigin: "top center", }} >
                     <thead>
                         <tr>
                             {content[0]?.map((col, index) => (

@@ -257,7 +257,7 @@ const HTMLRendererPage: FC<{}> = () => {
             </MatchCounter>
           </SearchBar>
         </SearchContainer>
-        <BodyIFrame id="html-body" title="HTML Document" style={{ transform: `scale(${zoomLevel})` }} />
+        <BodyIFrame id="html-body" title="HTML Document" style={{ transform: `scale(${zoomLevel})`, transformOrigin: "top center", }} />
       </Container>
 
     </>

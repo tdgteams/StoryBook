@@ -108,7 +108,7 @@ const TXTRendererCon: FC<{}> = () => {
           </SearchBar>
         </SearchContainer>
         <Content
-          style={{ transform: `scale(${zoomLevel})` }}
+          style={{ transform: `scale(${zoomLevel})`, transformOrigin: "top center", }}
           dangerouslySetInnerHTML={{
             __html: highlightedContent || (currentDocument?.fileData as string),
           }}
@@ -134,6 +134,7 @@ const Content = styled.div`
   background-color: #f9f9f9;
   font-family: monospace;
   white-space: pre-wrap;
+  overflow-x: auto;
  
   .search-highlight {
     background-color: yellow;

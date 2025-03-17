@@ -84,11 +84,13 @@ interface WithPDFInputProps {
 export const DocumentViewer: React.FC<WithPDFInputProps> = ({ documents, additionalInput }) => {
   const [newDocs, setNewDocs] = useState<File[]>([]);
   const [highlightedWords, setHighlightedWords] = useState<string[]>([]);
+  const [supported, setSupported] = useState<Boolean>(true);
 
   useEffect(() => {
     if (documents && documents.length > 0) {
       handleConvert(documents);
       getHighlightingWords(additionalInput);
+      setSupported(true);
     }
   }, [documents]);
 
@@ -157,7 +159,8 @@ export const DocumentViewer: React.FC<WithPDFInputProps> = ({ documents, additio
         }
       } catch (error) {
         console.error('Error processing file URI:', error);
-        alert('Error processing file URI');
+        setSupported(false);
+        // alert('Error processing file URI');
       }
     }
 
@@ -167,8 +170,8 @@ export const DocumentViewer: React.FC<WithPDFInputProps> = ({ documents, additio
   return (
     <>
       {/* Render the documents in DocViewer */}
-
-      {newDocs.length > 0 && (
+      {!supported && <h2>Unsupported File Format</h2>}
+      {supported && newDocs.length > 0 && (
         <DocViewer
           documents={newDocs.map((file) => ({
             uri: window.URL.createObjectURL(file),

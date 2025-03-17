@@ -128,7 +128,7 @@ const XMLPage: FC<{}> = () => {
             <NavButton onClick={() => handleNavigation("down")}><ChevronDown size={18} /></NavButton>
           </SearchBar>
         </SearchContainer>
-        <Content style={{ transform: `scale(${zoomLevel})` }}>
+        <Content style={{ transform: `scale(${zoomLevel})`, transformOrigin: "top center", }}>
           <pre>
             <span dangerouslySetInnerHTML={{ __html: highlightedXML }} />
           </pre>
