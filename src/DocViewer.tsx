@@ -50,7 +50,9 @@ const DocViewer = forwardRef<DocViewerRef, DocViewerProps>((props, ref) => {
           id="react-doc-viewer"
           data-testid="react-doc-viewer"
           className={props.className}
-          style={props.style}
+          //RL: Commented props.style and added below style for horizontal scroll
+          // style={props.style} 
+          style={{ width: "100%", height: "95%",overflow: "auto",position: "relative",border: "2px solid black"}}
         >
           <HeaderBar />
           <ProxyRenderer />

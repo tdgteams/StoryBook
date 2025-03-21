@@ -1,6 +1,6 @@
 {
-  "name": "tdg-react-doc-viewer",
-  "version": "1.0.154",
+  "name": "tdg-react-doc-viewer-v3",
+  "version": "1.0.6",
   "description": "File viewer for React.",
   "author": "THE DIGITAL GROUP",
   "type": "module",
@@ -19,12 +19,12 @@
     "dist/**"
   ],
   "types": "./dist/index.d.ts",
-  "main": "./dist/tdg-react-doc-viewer.cjs",
-  "module": "./dist/tdg-react-doc-viewer.js",
+  "main": "./dist/tdg-react-doc-viewer-v3.cjs",
+  "module": "./dist/tdg-react-doc-viewer-v3.js",
   "exports": {
     ".": {
-      "import": "./dist/tdg-react-doc-viewer.js",
-      "require": "./dist/tdg-react-doc-viewer.cjs",
+      "import": "./dist/tdg-react-doc-viewer-v3.js",
+      "require": "./dist/tdg-react-doc-viewer-v3.cjs",
       "types": "./dist/index.d.ts"
     },
     "./dist/index.css": {
