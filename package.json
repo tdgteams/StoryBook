@@ -32,18 +32,18 @@
       "require": "./dist/index.css"
     }
   },
-  "scripts": {
-    "start": "storybook dev -p 6006",
-    "build": "vite build",
-    "test": "vitest run",
-    "lint": "eslint ./src --ext .ts,.tsx",
-    "prettier:check": "prettier --check .",
-    "prettier:fix": "prettier --write .",
-    "storybook:build": "rm -rf storybook-static && storybook build",
-    "deploy": "npm run storybook:build && gh-pages --nojekyll -d storybook-static --message 'feat: storybook deploy'",
-    "prerelease": "git checkout main && git pull && npm run prettier:check && npm run lint && npm run test && npm run build && node ./scripts/copy-worker.mjs && cd use-cases/nextjs && npm i && npm run build",
-    "release": "release-it && npm run deploy"
-  },
+"scripts": {
+  "start": "storybook dev -p 6006",
+  "build": "vite build",
+  "test": "vitest run",
+  "lint": "eslint ./src --ext .ts,.tsx",
+  "prettier:check": "prettier --check .",
+  "prettier:fix": "prettier --write .",
+  "storybook:build": "rimraf storybook-static && storybook build",
+  "deploy": "npm run storybook:build && npx gh-pages -d storybook-static --nojekyll",
+  "storybook": "storybook dev -p 6006",
+  "build-storybook": "storybook build"
+},
   "dependencies": {
     "@types/mustache": "^4.2.5",
     "@types/papaparse": "^5.3.14",
@@ -59,10 +59,12 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.6",
     "@rollup/plugin-dsv": "^3.0.4",
     "@storybook/addon-essentials": "^8.1.5",
     "@storybook/addon-interactions": "^8.1.5",
     "@storybook/addon-links": "^8.1.5",
+    "@storybook/addon-onboarding": "^8.6.6",
     "@storybook/blocks": "^8.1.5",
     "@storybook/react": "^8.1.5",
     "@storybook/react-vite": "^8.1.5",
