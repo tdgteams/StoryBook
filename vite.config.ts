@@ -4,6 +4,7 @@ import dts from "vite-plugin-dts";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
+  base: "/StoryBook/", // 👈 Required for GitHub Pages deployment
   plugins: [
     dts({
       tsconfigPath: "./tsconfig.build.json",
